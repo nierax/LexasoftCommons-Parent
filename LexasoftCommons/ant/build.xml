@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="LexasoftCommons" default="dist" basedir="h:\java1.4">
+    <description>
+        build LogAnalysis project
+    </description>
+  <!-- set global properties for this build -->
+  <property name="project"    location="LexasoftCommons"/>
+  <property name="src"	      location="${project}/src"/>
+  <property name="build"      location="${project}/build"/>
+  <property name="jarfile"    location="${build}/lexasoft-util.jar"/>
+	
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <mkdir dir="${build}/classes"/> 
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}/classes" debug="false" />
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+
+    <!-- Delete jar file, if existing -->
+    <!--delete file="${jarfile}"/-->
+    <!-- Put everything in ${build} into the jar file -->
+    <jar jarfile="${jarfile}" basedir="${build}/classes" compress="true"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+  </target>
+</project>
+
+

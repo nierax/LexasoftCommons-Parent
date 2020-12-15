@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+    <jar path="H:/Java1.4/bin/lexasoft-util.jar"/>
+    <options overwrite="false" compress="true" exportErrors="true"
+        exportWarnings="true" saveDescription="true"
+        descriptionLocation="/LexasoftCommons/common.jardesc"
+        useSourceFolders="false" buildIfNeeded="true"/>
+    <manifest manifestVersion="1.0" usesManifest="true"
+        reuseManifest="true" saveManifest="true"
+        generateManifest="false" manifestLocation="/LexasoftCommons/commons.mf">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false">
+        <javaElement handleIdentifier="=LexasoftCommons/src"/>
+        <folder path="/LexasoftCommons/res"/>
+    </selectedElements>
+</jardesc>
