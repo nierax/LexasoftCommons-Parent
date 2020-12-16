@@ -24,8 +24,8 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMaxSmallerMin() {
-		Exception exception = assertThrows(DiceException.class, () -> {
-			Dice dice = new Dice(6,1);
+			assertThrows(DiceException.class, () -> {
+			new Dice(6,1);
 		});
 	}
 
@@ -34,8 +34,8 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMaxEqualsMin() {
-		Exception exception = assertThrows(DiceException.class, () -> {
-			Dice dice = new Dice(1,1);
+		assertThrows(DiceException.class, () -> {
+			new Dice(1,1);
 		});
 	}
 
@@ -44,8 +44,8 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMaxMinUnderZero() {
-		Exception exception = assertThrows(DiceException.class, () -> {
-			Dice dice = new Dice(-6,-1);
+		assertThrows(DiceException.class, () -> {
+			new Dice(-6,-1);
 		}, "Both minimum and maximum value must be greater than zero.");
 	}
 
@@ -54,15 +54,14 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMinUnderZero() {
-		Exception exception;
 		// Smaller than zero
-		exception = assertThrows(DiceException.class, () -> {
-			Dice dice = new Dice(-1,6);
+		assertThrows(DiceException.class, () -> {
+			new Dice(-1,6);
 		}, "Minimum value must not be smaller than zero.");
 
 		// Equals zero
-		exception = assertThrows(DiceException.class, () -> {
-			Dice dice = new Dice(0,6);
+		assertThrows(DiceException.class, () -> {
+			new Dice(0,6);
 		}, "Minimum value must not be 0.");
 	}
 }
