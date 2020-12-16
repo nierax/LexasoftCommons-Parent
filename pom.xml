@@ -7,8 +7,8 @@
   <name>ls-commons-parent</name>
   
   <modules>
-  	<module>LexasoftCommons</module>
-  	<module>games</module>
+  	<module>ls-commons</module>
+  	<module>ls-games</module>
   </modules>
   
   <dependencies>
