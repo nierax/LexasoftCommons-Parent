@@ -1,0 +1,42 @@
+package de.lexasoft.common.model;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class ValueTest {
+
+	/**
+	 * Validator says ok, so the value must be set.
+	 */
+	@Test
+	void testSetValueOk() {
+		Value<Integer> cut = new Value<Integer>(new Validator<Integer>() {
+			 /* valid. */
+			@Override
+			public boolean validate(Integer value) {
+				return true;
+			}
+		});
+		cut.setValue(2);
+		assertEquals(cut.getValue(), 2);
+	}
+
+	/**
+	 * Validator says not ok, an exception is expected.
+	 */
+	@Test
+	void testSetValueNok() {
+		Value<Integer> cut = new Value<Integer>(new Validator<Integer>() {
+			 /* invalid. */
+			@Override
+			public boolean validate(Integer value) {
+				return false;
+			}
+		});
+		assertThrows(IllegalArgumentException.class, () -> {
+			cut.setValue(2);
+		});
+	}
+
+}
