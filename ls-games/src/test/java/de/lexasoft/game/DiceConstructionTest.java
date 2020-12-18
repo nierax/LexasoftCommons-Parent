@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import de.lexasoft.game.Dice.DiceException;
-
 class DiceConstructionTest {
 	
 	/**
@@ -24,17 +22,17 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMaxSmallerMin() {
-			assertThrows(DiceException.class, () -> {
+			assertThrows(IllegalArgumentException.class, () -> {
 			new Dice(6,1);
 		});
 	}
 
 	/**
-	 * Creation must fail, when the maximum value equals than the minimum value.
+	 * Creation must fail, when the maximum value equals the minimum value.
 	 */
 	@Test
 	void testConstructionMaxEqualsMin() {
-		assertThrows(DiceException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Dice(1,1);
 		});
 	}
@@ -44,7 +42,7 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMaxMinUnderZero() {
-		assertThrows(DiceException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Dice(-6,-1);
 		}, "Both minimum and maximum value must be greater than zero.");
 	}
@@ -55,12 +53,12 @@ class DiceConstructionTest {
 	@Test
 	void testConstructionMinUnderZero() {
 		// Smaller than zero
-		assertThrows(DiceException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Dice(-1,6);
 		}, "Minimum value must not be smaller than zero.");
 
 		// Equals zero
-		assertThrows(DiceException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new Dice(0,6);
 		}, "Minimum value must not be 0.");
 	}

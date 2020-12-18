@@ -40,6 +40,19 @@ public class Value<T> {
 		this.validator = validator;
 	}
 
+	/**
+	 * Creates a value object with the parametrized validator and an initialValue.
+	 * <p>
+	 * The initial value is not checked against the validator, because it can be used to signalize, that the object was not used until now.
+	 * 
+	 * @param validator
+	 * @param initialValue An inital value, can be outside the range, defined by the validator.
+	 */
+	public Value(Validator<T> validator, T initialValue) {
+		this.validator = validator;
+		this.value = initialValue;
+	}
+
 	public T getValue() {
 		return value;
 	}
@@ -51,5 +64,13 @@ public class Value<T> {
 			throw new IllegalArgumentException(message);
 		}
 		this.value = value;
+	}
+	
+	/**
+	 * Subclasses sometimes need access to the validator, as it is typically created within the constructor.
+	 * @return The validator of this object.
+	 */
+	protected Validator<T> getValidator() {
+		return validator;
 	}
 }
