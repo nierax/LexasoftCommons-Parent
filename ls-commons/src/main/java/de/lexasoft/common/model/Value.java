@@ -19,16 +19,7 @@ public class Value<T> {
 	 */
 	public Value() {
 		/* Validator is optional */
-		this(new Validator<T>() {
-
-			/**
-			 * Always valid.
-			 */
-			@Override
-			public boolean validate(T value) {
-				return true;
-			}
-		});
+		this((value) -> {return true;});
 	}
 	
 	/**

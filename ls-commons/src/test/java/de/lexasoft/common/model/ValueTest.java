@@ -11,13 +11,7 @@ class ValueTest {
 	 */
 	@Test
 	void testSetValueOk() {
-		Value<Integer> cut = new Value<Integer>(new Validator<Integer>() {
-			 /* valid. */
-			@Override
-			public boolean validate(Integer value) {
-				return true;
-			}
-		});
+		Value<Integer> cut = new Value<Integer>((value) -> {return true;});
 		cut.setValue(2);
 		assertEquals(cut.getValue(), 2);
 	}
@@ -27,13 +21,7 @@ class ValueTest {
 	 */
 	@Test
 	void testSetValueNok() {
-		Value<Integer> cut = new Value<Integer>(new Validator<Integer>() {
-			 /* invalid. */
-			@Override
-			public boolean validate(Integer value) {
-				return false;
-			}
-		});
+		Value<Integer> cut = new Value<Integer>((value) -> {return false;});
 		assertThrows(IllegalArgumentException.class, () -> {
 			cut.setValue(2);
 		});

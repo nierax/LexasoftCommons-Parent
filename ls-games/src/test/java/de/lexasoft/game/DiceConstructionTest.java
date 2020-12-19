@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class DiceConstructionTest {
-	
+
 	/**
 	 * Creation correct, if the fields are correctly given?
 	 */
 	@Test
 	void testConstructionOk() {
-		Dice dice = new Dice(1,6);
+		Dice dice = new Dice(1, 6);
 		assertNotNull(dice, "Dice not created correctly");
 		assertEquals(-1, dice.getValue(), "Value must be -1 initially");
 	}
@@ -22,8 +22,8 @@ class DiceConstructionTest {
 	 */
 	@Test
 	void testConstructionMaxSmallerMin() {
-			assertThrows(IllegalArgumentException.class, () -> {
-			new Dice(6,1);
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Dice(6, 1);
 		});
 	}
 
@@ -33,7 +33,7 @@ class DiceConstructionTest {
 	@Test
 	void testConstructionMaxEqualsMin() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Dice(1,1);
+			new Dice(1, 1);
 		});
 	}
 
@@ -43,7 +43,7 @@ class DiceConstructionTest {
 	@Test
 	void testConstructionMaxMinUnderZero() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Dice(-6,-1);
+			new Dice(-6, -1);
 		}, "Both minimum and maximum value must be greater than zero.");
 	}
 
@@ -54,12 +54,12 @@ class DiceConstructionTest {
 	void testConstructionMinUnderZero() {
 		// Smaller than zero
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Dice(-1,6);
+			new Dice(-1, 6);
 		}, "Minimum value must not be smaller than zero.");
 
 		// Equals zero
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Dice(0,6);
+			new Dice(0, 6);
 		}, "Minimum value must not be 0.");
 	}
 }
