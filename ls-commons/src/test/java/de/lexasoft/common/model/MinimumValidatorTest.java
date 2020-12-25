@@ -15,19 +15,19 @@ import org.junit.jupiter.params.provider.ValueSource;
  * 
  * @author Axel
  */
-class MinimumValueTest {
+class MinimumValidatorTest {
 
-  private MinimumValue<Integer> cut;
+  private MinimumValidator<Integer> cut;
 
   @BeforeEach
   void prepareTest() {
     // cut with minimum value 1
-    cut = new MinimumValue<Integer>(Integer.valueOf(1));
+    cut = new MinimumValidator<Integer>(Integer.valueOf(1));
   }
 
   /**
    * Test method for
-   * {@link de.lexasoft.common.model.MinimumValue#validate(java.lang.Number)}.
+   * {@link de.lexasoft.common.model.MinimumValidator#validate(java.lang.Number)}.
    * 
    * Digits bigger than minimum value (1) must pass with true as result.
    */
@@ -39,7 +39,7 @@ class MinimumValueTest {
 
   /**
    * Test method for
-   * {@link de.lexasoft.common.model.MinimumValue#validate(java.lang.Number)}.
+   * {@link de.lexasoft.common.model.MinimumValidator#validate(java.lang.Number)}.
    * 
    * Digits lower than minimum value (1) must be rejected with false as result.
    */

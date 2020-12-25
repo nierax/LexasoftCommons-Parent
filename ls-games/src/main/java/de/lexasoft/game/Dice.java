@@ -5,7 +5,7 @@ package de.lexasoft.game;
 
 import java.util.Random;
 
-import de.lexasoft.common.model.Range;
+import de.lexasoft.common.model.RangeValidator;
 import de.lexasoft.common.model.Value;
 
 /**
@@ -29,7 +29,7 @@ public class Dice extends Value<Integer>{
 	 * @param max
 	 */
 	public Dice(int min, int max) {
-		super(new Range<Integer>(min, max), -1);
+		super(new RangeValidator<Integer>(min, max), -1);
 		if((min<=0) || (max<=0)) {
 			throw new IllegalArgumentException("Maximum and minimum value must not be 0.");
 		}
@@ -60,14 +60,14 @@ public class Dice extends Value<Integer>{
 	 * @return the min
 	 */
 	int getMin() {
-		return ((Range<Integer>)getValidator()).getMin();
+		return ((RangeValidator<Integer>)getValidator()).getMin();
 	}
 
 	/**
 	 * @return the max
 	 */
 	int getMax() {
-		return ((Range<Integer>)getValidator()).getMax();
+		return ((RangeValidator<Integer>)getValidator()).getMax();
 	}
 
 }

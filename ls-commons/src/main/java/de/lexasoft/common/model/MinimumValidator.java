@@ -9,14 +9,14 @@ package de.lexasoft.common.model;
  * @author Axel
  *
  */
-public class MinimumValue<T extends Number> implements Validator<T> {
+public class MinimumValidator<T extends Number> implements Validator<T> {
 
   private T minimumValue;
 
   /**
    * Creates the validator.
    */
-  public MinimumValue(T minimumVale) {
+  public MinimumValidator(T minimumVale) {
     this.minimumValue = minimumVale;
   }
 

@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class RangeTest {
+class RangeValidatorTest {
 
 	/**
 	 * Max is greater than min. Valid.
 	 */
 	@Test
 	void testConstructorValid() {
-		Range<Integer> range = new Range<Integer>(0, 1);
+		RangeValidator<Integer> range = new RangeValidator<Integer>(0, 1);
 		assertEquals(0, range.getMin());
 		assertEquals(1, range.getMax());
 	}
@@ -22,7 +22,7 @@ class RangeTest {
 	@Test
 	void testConstructorInvalid() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Range<Integer>(1,0);
+			new RangeValidator<Integer>(1,0);
 		});
 	}
 	
@@ -31,7 +31,7 @@ class RangeTest {
 	 */
 	@Test 
 	void testValidateInRange( ) {
-		Range<Integer> range = new Range<Integer>(0, 2);
+		RangeValidator<Integer> range = new RangeValidator<Integer>(0, 2);
 		assertTrue(range.validate(1), "The value within the range must be considered valid");
 	}
 
@@ -40,7 +40,7 @@ class RangeTest {
 	 */
 	@Test 
 	void testValidateMin( ) {
-		Range<Integer> range = new Range<Integer>(0, 2);
+		RangeValidator<Integer> range = new RangeValidator<Integer>(0, 2);
 		assertTrue(range.validate(0), "The value equal to min must be considered valid");
 	}
 
@@ -49,7 +49,7 @@ class RangeTest {
 	 */
 	@Test 
 	void testValidateMax( ) {
-		Range<Integer> range = new Range<Integer>(0, 2);
+		RangeValidator<Integer> range = new RangeValidator<Integer>(0, 2);
 		assertTrue(range.validate(2), "The value equal to max must be considered valid");
 	}
 
@@ -58,7 +58,7 @@ class RangeTest {
 	 */
 	@Test 
 	void testValidateUnderMin( ) {
-		Range<Integer> range = new Range<Integer>(1, 3);
+		RangeValidator<Integer> range = new RangeValidator<Integer>(1, 3);
 		assertFalse(range.validate(0), "The value below min must be considered invalid");
 	}
 
@@ -67,7 +67,7 @@ class RangeTest {
 	 */
 	@Test 
 	void testValidateAboveMax( ) {
-		Range<Integer> range = new Range<Integer>(1, 3);
+		RangeValidator<Integer> range = new RangeValidator<Integer>(1, 3);
 		assertFalse(range.validate(4), "The value above max must be considered invalid");
 	}
 

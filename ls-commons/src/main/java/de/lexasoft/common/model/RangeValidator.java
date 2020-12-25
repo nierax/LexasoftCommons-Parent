@@ -5,12 +5,12 @@ package de.lexasoft.common.model;
  * 
  * @author Axel
  */
-public class Range<T extends Number> implements Validator<T> {
+public class RangeValidator<T extends Number> implements Validator<T> {
 
 	private T min;
 	private T max;
 	
-	public Range(T min, T max) {
+	public RangeValidator(T min, T max) {
 		this.min = min;
 		this.max = max;
 		if(min.doubleValue() > max.doubleValue()) {
