@@ -1,9 +1,10 @@
 package de.lexasoft.common.model;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,10 @@ class ValueTest {
     Value<Integer> cut = new Value<>((value) -> {
       return true;
     });
-    cut.setValue(2);
+    Integer value = cut.setValue(2);
     assertEquals(cut.getValue(), 2);
-    assertTrue("Value must be set", cut.hasValue());
+    assertSame(value, cut.getValue(), "The value returned must be the one, inserted.");
+    assertTrue(cut.hasValue(), "Value must be set");
   }
 
   /**
@@ -42,7 +44,7 @@ class ValueTest {
   @Test
   void testConstructor_WithoutInitialValue() {
     Value<Integer> cut = new Value<>();
-    assertFalse("Value must be unset", cut.hasValue());
+    assertFalse(cut.hasValue(), "Value must be unset");
   }
 
   /**
@@ -51,7 +53,7 @@ class ValueTest {
   @Test
   void testConstructor_WithInitialValue() {
     Value<Integer> cut = new Value<>(2);
-    assertTrue("Value must be set", cut.hasValue());
+    assertTrue(cut.hasValue(), "Value must be set");
   }
 
   /**
@@ -75,10 +77,10 @@ class ValueTest {
     Value<Integer> cut = new Value<>((value) -> {
       return true;
     });
-    assertFalse("Value must be unset", cut.hasValue());
+    assertFalse(cut.hasValue(), "Value must be unset");
     cut.setValue(2);
-    assertTrue("Value must be set", cut.hasValue());
+    assertTrue(cut.hasValue(), "Value must be set");
     cut.unsetValue();
-    assertFalse("Value must be unset", cut.hasValue());
+    assertFalse(cut.hasValue(), "Value must be unset");
   }
 }

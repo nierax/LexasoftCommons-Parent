@@ -74,10 +74,12 @@ public class Value<T> {
 
   /**
    * @param value The value to set.
+   * @return The value, set.
    */
-  public void setValue(T value) {
+  public T setValue(T value) {
     validate(value);
     this.value = value;
+    return value;
   }
 
   /**
