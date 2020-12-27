@@ -120,7 +120,9 @@ public class Value<T> {
   /**
    * Unsets the value.
    */
-  public void unsetValue() {
+  public T unsetValue() {
+    T lastValue = value;
     value = null;
+    return lastValue;
   }
 }
