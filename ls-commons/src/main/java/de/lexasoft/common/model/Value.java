@@ -125,4 +125,24 @@ public class Value<T> {
     value = null;
     return lastValue;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof Value)) {
+      return false;
+    }
+    if (super.equals(obj)) {
+      return true;
+    }
+    @SuppressWarnings("unchecked")
+    Value<T> otherValue = (Value<T>) obj;
+    if ((value == otherValue.value)) {
+      return true;
+    }
+    if ((value == null) && (otherValue.value != null)) {
+      return false;
+    }
+    return value.equals(otherValue.value);
+  }
+
 }

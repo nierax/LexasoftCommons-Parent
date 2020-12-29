@@ -6,7 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class ValueTest {
 
@@ -82,5 +87,19 @@ class ValueTest {
     assertTrue(cut.hasValue(), "Value must be set");
     cut.unsetValue();
     assertFalse(cut.hasValue(), "Value must be unset");
+  }
+
+  private static Stream<Arguments> testEquals() {
+    return Stream.of(Arguments.of(1, 1, true), Arguments.of(0, 1, false), Arguments.of(null, null, true),
+        Arguments.of(null, 1, false), Arguments.of(1, null, false));
+  }
+
+  @ParameterizedTest
+  @MethodSource
+  void testEquals(Integer val1, Integer val2, boolean result) {
+    Value<Integer> cut1 = new Value<Integer>(val1);
+    Value<Integer> cut2 = new Value<Integer>(val2);
+
+    assertEquals(result, cut1.equals(cut2), "equals() did not respond correctly");
   }
 }
