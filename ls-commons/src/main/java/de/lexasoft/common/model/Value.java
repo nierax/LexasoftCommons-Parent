@@ -145,4 +145,12 @@ public class Value<T> {
     return value.equals(otherValue.value);
   }
 
+  @Override
+  public String toString() {
+    if (getValue() == null) {
+      return "null";
+    }
+    return getValue().toString();
+  }
+
 }
