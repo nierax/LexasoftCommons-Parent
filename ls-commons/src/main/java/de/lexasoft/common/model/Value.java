@@ -3,12 +3,17 @@
  */
 package de.lexasoft.common.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Represents a value, which can be verified against a validator.
  * 
  * @author Axel
  */
 public class Value<T> {
+
+  private static Logger LOGGER = LoggerFactory.getLogger(Value.class);
 
   private T value;
 
@@ -91,7 +96,7 @@ public class Value<T> {
   private void validate(T value) {
     if (!validator.validate(value)) {
       String message = String.format("Value %s not valid regarding validator %s\n", value, validator.getClass());
-      System.out.print(message);
+      LOGGER.warn(message);
       throw new IllegalArgumentException(message);
     }
   }
