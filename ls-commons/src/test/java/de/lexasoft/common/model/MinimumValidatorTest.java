@@ -3,8 +3,8 @@
  */
 package de.lexasoft.common.model;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +34,7 @@ class MinimumValidatorTest {
   @ParameterizedTest
   @ValueSource(ints = { 1, 2, 3, 4, 10, 10000 })
   void testValidateOk(int value) {
-    assertTrue("Must pass as being above the minimum.", cut.validate(Integer.valueOf(value)));
+    assertTrue(cut.validate(Integer.valueOf(value)), "Must pass as being above the minimum.");
   }
 
   /**

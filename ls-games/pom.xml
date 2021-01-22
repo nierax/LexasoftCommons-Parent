@@ -14,7 +14,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>de.lexasoft.commons</groupId>
+			<groupId>de.lexasoft</groupId>
 			<artifactId>ls-commons</artifactId>
 		</dependency>
 
