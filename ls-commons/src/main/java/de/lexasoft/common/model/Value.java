@@ -102,12 +102,11 @@ public class Value<T> {
   }
 
   /**
-   * Subclasses sometimes need access to the validator, as it is typically created
-   * within the constructor.
+   * Validator is accessible to the public to be reusable, for example to process a pre check of a value.
    * 
    * @return The validator of this object.
    */
-  protected Validator<T> getValidator() {
+  public Validator<T> getValidator() {
     return validator;
   }
 
