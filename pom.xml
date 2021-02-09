@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.lexasoft</groupId>
 	<artifactId>ls-commons-parent</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ls-commons-parent</name>
 
@@ -18,7 +18,7 @@
 			<dependency>
 				<groupId>de.lexasoft</groupId>
 				<artifactId>ls-commons</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.2-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
