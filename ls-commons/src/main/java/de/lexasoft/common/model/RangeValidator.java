@@ -7,28 +7,19 @@ package de.lexasoft.common.model;
  */
 public class RangeValidator<T extends Number> implements Validator<T> {
 
-	private T min;
-	private T max;
-	
-	public RangeValidator(T min, T max) {
-		this.min = min;
-		this.max = max;
-		if(min.doubleValue() > max.doubleValue()) {
-			throw new IllegalArgumentException("Min must not be greater than max");
-		}
-	}
+	private Range<T> range;
 
-	public T getMin() {
-		return min;
-	}
-
-	public T getMax() {
-		return max;
+	private RangeValidator(Range<T> range) {
+		this.range = range;
 	}
 
 	@Override
 	public boolean validate(T value) {
-		return ((value.doubleValue() >= min.doubleValue()) && (value.doubleValue() <= max.doubleValue()));
+		return ((value.doubleValue() >= range.min().doubleValue()) && (value.doubleValue() <= range.max().doubleValue()));
+	}
+
+	public static <T extends Number> RangeValidator<T> of(Range<T> range) {
+		return new RangeValidator<>(range);
 	}
 
 }
