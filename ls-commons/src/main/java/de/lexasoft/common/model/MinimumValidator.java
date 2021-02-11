@@ -9,24 +9,28 @@ package de.lexasoft.common.model;
  * @author Axel
  *
  */
-public class MinimumValidator<T extends Number> implements Validator<T> {
+public final class MinimumValidator<T extends Number> implements Validator<T> {
 
-  private T minimumValue;
+	private final T minimumValue;
 
-  /**
-   * Creates the validator.
-   */
-  public MinimumValidator(T minimumVale) {
-    this.minimumValue = minimumVale;
-  }
+	/**
+	 * Creates the validator.
+	 */
+	private MinimumValidator(T minimumVale) {
+		this.minimumValue = minimumVale;
+	}
 
-  /**
-   * @param value Value to check.
-   * @return True, if the value is bigger than the minimum (false otherwise)
-   */
-  @Override
-  public boolean validate(T value) {
-    return value.doubleValue() >= minimumValue.doubleValue();
-  }
+	/**
+	 * @param value Value to check.
+	 * @return True, if the value is bigger than the minimum (false otherwise)
+	 */
+	@Override
+	public boolean validate(T value) {
+		return value.doubleValue() >= minimumValue.doubleValue();
+	}
+
+	public static <T extends Number> Validator<T> of(T value) {
+		return new MinimumValidator<T>(value);
+	}
 
 }

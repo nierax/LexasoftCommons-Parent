@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class RangeValidatorTest {
 
-	private RangeValidator<Integer> cut;
+	private Validator<Integer> cut;
 
 	@BeforeEach
 	void prepareTestcase() {

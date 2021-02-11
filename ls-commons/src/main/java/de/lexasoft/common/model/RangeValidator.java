@@ -7,7 +7,7 @@ package de.lexasoft.common.model;
  */
 public class RangeValidator<T extends Number> implements Validator<T> {
 
-	private Range<T> range;
+	private final Range<T> range;
 
 	private RangeValidator(Range<T> range) {
 		this.range = range;
@@ -18,7 +18,7 @@ public class RangeValidator<T extends Number> implements Validator<T> {
 		return ((value.doubleValue() >= range.min().doubleValue()) && (value.doubleValue() <= range.max().doubleValue()));
 	}
 
-	public static <T extends Number> RangeValidator<T> of(Range<T> range) {
+	public static <T extends Number> Validator<T> of(Range<T> range) {
 		return new RangeValidator<>(range);
 	}
 
