@@ -8,13 +8,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class ScalarTypeTest {
+class SimpleTypeTest {
 
-	private ScalarType<Integer> cut;
+	private SimpleType<Integer> cut;
+
+	/**
+	 * Being able to instantiate abstract class in test.
+	 */
+	class SimpleCUTType<T> extends SimpleType<T> {
+
+		protected SimpleCUTType(T value) {
+			super(value);
+		}
+
+	}
 
 	@BeforeEach
 	void prepareTestCase() {
-		cut = new ScalarType<Integer>(3);
+		cut = new SimpleCUTType<Integer>(3);
 	}
 
 	/**
@@ -22,18 +33,19 @@ class ScalarTypeTest {
 	 */
 	@Test
 	void testEqualsOtherType() {
-		assertFalse(cut.equals(new ScalarType<String>("me")), "Equals must be false, if another type is used.");
+		assertFalse(cut.equals(new SimpleCUTType<String>("me")), "Equals must be false, if another type is used.");
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = { 0, 1, 2, 4, 5, 6, 7777, -100 })
 	void testEqualsFalseIfDifferentIntegerValue(int value) {
-		assertFalse(cut.equals(new ScalarType<Integer>(value)),
+		assertFalse(cut.equals(new SimpleCUTType<Integer>(value)),
 		    "Equals mus be false, if a different Integer value is used.");
 	}
 
 	@Test
 	void testEqualsTrueWithSameIntegerValue() {
-		assertTrue(cut.equals(new ScalarType<Integer>(3)), "Equals mus be true, if used with an identical integer value.");
+		assertTrue(cut.equals(new SimpleCUTType<Integer>(3)),
+		    "Equals mus be true, if used with an identical integer value.");
 	}
 }

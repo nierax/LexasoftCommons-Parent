@@ -11,7 +11,7 @@ package de.lexasoft.common.model;
  * @param <T>
  */
 @ValueObject
-public class ScalarType<T> {
+public abstract class SimpleType<T> {
 
 	private final T value;
 
@@ -20,7 +20,7 @@ public class ScalarType<T> {
 	 * 
 	 * @param value Value of the object, immutable.
 	 */
-	protected ScalarType(T value) {
+	protected SimpleType(T value) {
 		this.value = value;
 	}
 
@@ -35,14 +35,14 @@ public class ScalarType<T> {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof ScalarType)) {
+		if (!(obj instanceof SimpleType)) {
 			return false;
 		}
 		if (super.equals(obj)) {
 			return true;
 		}
 		@SuppressWarnings("unchecked")
-		ScalarType<T> other = (ScalarType<T>) obj;
+		SimpleType<T> other = (SimpleType<T>) obj;
 		if ((value == other.value)) {
 			return true;
 		}
