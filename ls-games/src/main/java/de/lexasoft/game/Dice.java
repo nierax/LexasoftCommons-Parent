@@ -6,16 +6,14 @@ package de.lexasoft.game;
 import java.util.Random;
 
 import de.lexasoft.common.model.Range;
-import de.lexasoft.common.model.RangeValidator;
-import de.lexasoft.common.model.Value;
 
 /**
  * Dice with several numbers in positioning.
  * 
- * @author Axel Niering
+ * @author nierax
  *
  */
-public class Dice extends Value<Integer> {
+public class Dice {
 
 	/**
 	 * Keep the generator static to avoid the same seed in several objects.
@@ -25,20 +23,25 @@ public class Dice extends Value<Integer> {
 	private final Range<Integer> range;
 
 	/**
+	 * The rolled dots
+	 */
+	private DiceDots dots;
+
+	/**
 	 * Create a dice, which can roll in several ranges from min to max.
 	 * 
 	 * @param min
 	 * @param max
 	 */
 	private Dice(Range<Integer> range) {
-		super(RangeValidator.of(range));
 		this.range = range;
-		if ((range.min() <= 0) || (range.max() <= 0)) {
-			throw new IllegalArgumentException("Maximum and minimum value must not be 0.");
+		if ((range.min() < 0) || (range.max() < 0)) {
+			throw new IllegalArgumentException("Maximum and minimum value must not be below 0.");
 		}
 		if ((range.min() == range.max())) {
 			throw new IllegalArgumentException("Maximum and minimum value must differ.");
 		}
+		dots = null;
 	}
 
 	/**
@@ -47,19 +50,19 @@ public class Dice extends Value<Integer> {
 	 * 
 	 * @return Returns the rolled value.
 	 */
-	public int roll() {
+	public DiceDots roll() {
 		int value = generator.nextInt(max() + 1 - min());
 		value += min();
-		setValue(value);
-		return value;
+		dots = DiceDots.of(value);
+		return dots;
 	}
 
 	/**
 	 * 
-	 * @return
+	 * @return True if rolled (at least once), false otherwise.
 	 */
 	public boolean isRolled() {
-		return hasValue();
+		return dots != null;
 	}
 
 	/**

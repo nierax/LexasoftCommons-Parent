@@ -38,8 +38,8 @@ public class DiceCup {
 	 * 
 	 * @return List of rolled values.
 	 */
-	public List<Integer> roll() {
-		List<Integer> values = new ArrayList<Integer>();
+	public List<DiceDots> roll() {
+		List<DiceDots> values = new ArrayList<>();
 		for (Dice dice : dices) {
 			values.add(dice.roll());
 		}

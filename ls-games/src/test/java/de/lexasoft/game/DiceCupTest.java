@@ -34,12 +34,13 @@ class DiceCupTest {
 	@Test
 	void testRoll() {
 		DiceCup cup = DiceCup.of(5, Range.of(1, 6));
-		List<Integer> values = cup.roll();
+		List<DiceDots> values = cup.roll();
 		assertNotNull(values, "List of results mus not be null.");
 		assertEquals(5, values.size(), "Size of values must be equal to number of dices in cup.");
-		for (Integer value : values) {
-			System.out.println("Value: " + value);
-			assertTrue((value <= 6) && (value >= 1), String.format("Value %s not in range between %s and %s", value, 1, 6));
+		for (DiceDots dots : values) {
+			System.out.println("Value: " + dots);
+			assertTrue((dots.value() <= 6) && (dots.value() >= 1),
+			    String.format("Value %s not in range between %s and %s", dots, 1, 6));
 		}
 	}
 

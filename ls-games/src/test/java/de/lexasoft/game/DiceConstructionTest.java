@@ -17,7 +17,7 @@ class DiceConstructionTest {
 	void testConstructionOk() {
 		Dice dice = Dice.of(Range.of(1, 6));
 		assertNotNull(dice, "Dice not created correctly");
-		assertFalse(dice.hasValue(), "Dice must be confirmed being not rolled after creation");
+		assertFalse(dice.isRolled(), "Dice must be confirmed being not rolled after creation");
 	}
 
 	/**
@@ -59,10 +59,5 @@ class DiceConstructionTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			Dice.of(Range.of(-1, 6));
 		}, "Minimum value must not be smaller than zero.");
-
-		// Equals zero
-		assertThrows(IllegalArgumentException.class, () -> {
-			Dice.of(Range.of(0, 6));
-		}, "Minimum value must not be 0.");
 	}
 }
