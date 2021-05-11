@@ -24,23 +24,28 @@ public class Point {
 		this.y = y;
 	}
 
-	double x() {
+	public double x() {
 		return x;
 	}
 
-	void x(double x) {
+	public void x(double x) {
 		this.x = x;
 	}
 
-	double y() {
+	public double y() {
 		return y;
 	}
 
-	void y(double y) {
+	public void y(double y) {
 		this.y = y;
 	}
 
 	public static Point of(double x, double y) {
 		return new Point(x, y);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("[px=%s,py=%s]", x, y);
 	}
 }
