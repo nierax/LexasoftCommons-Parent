@@ -4,3 +4,4 @@ build*
 *.bak
 *.sik
 *.versionsBackup
+junit-tmp
