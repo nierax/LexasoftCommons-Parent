@@ -72,24 +72,26 @@ class BezierTest {
 	}
 
 	/**
+	 * Test for tFromX, where x is a value, which exists in the bezier formula.
 	 * 
+	 * @param x The x parameter to search for.
+	 * @throws MathException
 	 */
 	@ParameterizedTest
-	@ValueSource(doubles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
-	void testTFromX(double x) {
+	@ValueSource(doubles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0.2, 0.05, 5.3, 2.1, 0.5, 0.9 })
+	void testTFromX2(double x) throws MathException {
 		Bezier cut = Bezier.of(controlPoints);
-		double t = cut.tFromX(x);
+		double t = cut.tFromX2(x, 0.001);
 		assertNotNull(t);
-//		assertTrue((t >= 0));
 		assertEquals(x, cut.bezier(t).x(), 0.0001);
 	}
 
 	@ParameterizedTest
-	@ValueSource(doubles = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0.2, 0.05, 5.3, 2.1 })
-	void testTFromX2(double x) {
+	@ValueSource(doubles = { -0.1, -1, 10.1, 11 })
+	void testTFromX2OutOfRange(double x) {
 		Bezier cut = Bezier.of(controlPoints);
-		double t = cut.tFromX2(x);
-		assertNotNull(t);
-		assertEquals(x, cut.bezier(t).x(), 0.0001);
+		assertThrows(MathException.class, () -> {
+			cut.tFromX2(x);
+		});
 	}
 }
