@@ -44,6 +44,14 @@ class BezierCurvePlotterTest {
 		return list;
 	}
 
+	private static List<Point> createList(Point... points) {
+		List<Point> list = new ArrayList<>();
+		for (Point point : points) {
+			list.add(point);
+		}
+		return list;
+	}
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -53,7 +61,13 @@ class BezierCurvePlotterTest {
 
 	private static Stream<Arguments> testPlotCurve() {
 		return Stream.of(Arguments.of(create4PointList(), "junit-tmp/4-point-list.png"),
-		    Arguments.of(create3PointList(), "junit-tmp/3-point-list.png"));
+		    Arguments.of(create3PointList(), "junit-tmp/3-point-list.png"),
+		    Arguments.of(createList(Point.of(0, 0), Point.of(75, 75), Point.of(100, 100)), "junit-tmp/3-point-75-75.png"),
+		    Arguments.of(createList(Point.of(0, 0), Point.of(75, 100), Point.of(100, 100)), "junit-tmp/3-point-75-100.png"),
+		    Arguments.of(createList(Point.of(0, 0), Point.of(66, 100), Point.of(100, 100)), "junit-tmp/3-point-66-100.png"),
+		    Arguments.of(createList(Point.of(0, 0), Point.of(66, 120), Point.of(100, 100)), "junit-tmp/3-point-66-120.png"),
+		    Arguments.of(createList(Point.of(0, 0), Point.of(50, 100), Point.of(100, 100)), "junit-tmp/3-point-50-100.png"),
+		    Arguments.of(createList(Point.of(0, 0), Point.of(50, 0), Point.of(100, 100)), "junit-tmp/3-point-50-0.png"));
 	}
 
 	@ParameterizedTest
