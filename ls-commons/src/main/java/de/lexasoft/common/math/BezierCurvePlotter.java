@@ -17,6 +17,9 @@ import javax.imageio.ImageIO;
 
 /**
  * Draws a Bezier curve in any image.
+ * <p>
+ * Can use either a given image or creates a new one with the given width and
+ * height.
  * 
  * @author nierax
  *
@@ -88,7 +91,6 @@ public class BezierCurvePlotter {
 	}
 
 	private void drawLine(Point from, Point to) {
-//		graphics.setColor(Color.BLACK);
 		graphics.drawLine(from.x, from.y, to.x, to.y);
 	}
 
