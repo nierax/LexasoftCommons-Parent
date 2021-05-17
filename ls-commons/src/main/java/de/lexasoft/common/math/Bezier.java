@@ -30,7 +30,7 @@ public class Bezier {
 	 * The default accuracy (maximal difference) between the found x from the x,
 	 * expected.
 	 */
-	public static double DEF_ACCURACY = 1e-6;
+	public static double DEF_ACCURACY = 1e-5;
 
 	/**
 	 * Default iteration step to start from searching t for x.
@@ -42,6 +42,10 @@ public class Bezier {
 
 		public NotFoundInBezierCurveException(String message) {
 			super(message);
+		}
+
+		public NotFoundInBezierCurveException(String message, Exception ex) {
+			super(message, ex);
 		}
 
 	}
@@ -170,8 +174,26 @@ public class Bezier {
 				return t;
 			}
 		}
-		// Then search on the entire bezier curve.
-		return findMin(x, 0, dt, accuracy);
+		// Then search on the entire Bezier curve.
+		// In case we need to throw an exception.
+		String msg = String.format("Could not find a value for x=%s with dt=%s and accuracy %s with points %s", x, dt,
+		    accuracy, controlPoints);
+		double startDT = dt;
+		while (startDT > DEF_ACCURACY) {
+			try {
+				return findMin(x, 0, startDT, accuracy);
+			} catch (NotFoundInBezierCurveException ex) {
+				if (startDT > DEF_ACCURACY) {
+					// Try again with smaller startDT if the calculation fails.
+					startDT *= 0.1d;
+				} else {
+					// DEF_ACCURACY reached, I'm giving up.
+					throw new NotFoundInBezierCurveException(msg, ex);
+				}
+			}
+		}
+		// This should never be called.
+		throw new NotFoundInBezierCurveException(msg);
 	}
 
 	/**
