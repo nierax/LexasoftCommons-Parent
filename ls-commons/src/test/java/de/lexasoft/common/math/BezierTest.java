@@ -94,4 +94,13 @@ class BezierTest {
 			cut.tFromX2(x);
 		});
 	}
+
+	@ParameterizedTest
+	@ValueSource(doubles = { 0, 1, 2, 3, 4, 10, 22, 40, 48, 57, 58 })
+	void testTFromX2_58Error(double value) throws MathException {
+		Bezier cut = Bezier.of(createLoP(Point.of(0, 0), Point.of(29, 0), Point.of(29, 58), Point.of(58, 58)));
+		double t = cut.tFromX2(value);
+		assertNotNull(t);
+		assertEquals(value, cut.bezier(t).x(), 0.001);
+	}
 }
