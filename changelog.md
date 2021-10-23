@@ -1,6 +1,7 @@
 # Change log
 
 ## Unpublished
+* Added de.lexasoft.util.TimeMeasureSupport<T> for easy measuring duration of time consuming processes
 
 ## Version 0.1.1
 * Added package swing with text field formats
