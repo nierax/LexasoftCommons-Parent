@@ -83,8 +83,20 @@ public class TimeMeasureSupport<T> {
 	 * @return
 	 */
 	public long getTimeElapsed() {
+		return getDurationElapsed().toMillis();
+	}
+
+	/**
+	 * Gets the elapsed time of the last process running as @Duration object.
+	 * <p>
+	 * Throws an @TimeMeasureException, if the process has not been started yet or
+	 * is still running
+	 * 
+	 * @return
+	 */
+	public Duration getDurationElapsed() {
 		checkState();
-		return Duration.between(start, finish).toMillis();
+		return Duration.between(start, finish);
 	}
 
 }
