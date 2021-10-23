@@ -28,7 +28,7 @@ import java.time.Instant;
  */
 public class TimeMeasureSupport<T> {
 
-	interface TimeComsumingProcess<T> {
+	public interface TimeComsumingProcess<T> {
 		T run();
 	}
 
@@ -82,7 +82,7 @@ public class TimeMeasureSupport<T> {
 	 * 
 	 * @return
 	 */
-	public double getTimeElapsed() {
+	public long getTimeElapsed() {
 		checkState();
 		return Duration.between(start, finish).toMillis();
 	}
