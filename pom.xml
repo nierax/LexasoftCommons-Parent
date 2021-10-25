@@ -60,16 +60,14 @@
 	</dependencyManagement>
 
 	<distributionManagement>
-<!-- 		<repository> -->
-<!-- 			<id>internal.repo</id> -->
-<!-- 			<name>Temporary Staging Repository</name> -->
-<!-- 			<url>file://h:/mvn-artifact</url> -->
-<!-- 		</repository> -->
-	<repository>
-		<id>github</id>
-		<name>GitHub OWNER Apache Maven Packages</name>
-		<url>https://maven.pkg.github.com/nierax/LexasoftCommons-Parent</url>
-	</repository>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/nierax/LexasoftCommons-Parent</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</distributionManagement>
 
 	<build>
