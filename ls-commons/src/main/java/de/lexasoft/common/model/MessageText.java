@@ -20,16 +20,16 @@ package de.lexasoft.common.model;
  * @author nierax
  *
  */
-public class ErrorMessage {
+public class MessageText {
 
 	private String msgString;
 
 	/**
-	 * The ErrorMessage needs a String Representation to be created.
+	 * The MessageText needs a String Representation to be created.
 	 * 
 	 * @param msgString
 	 */
-	private ErrorMessage(String msgString) {
+	private MessageText(String msgString) {
 		this.msgString = msgString;
 	}
 
@@ -44,8 +44,8 @@ public class ErrorMessage {
 	 * @param errorText
 	 * @return
 	 */
-	public static final ErrorMessage of(String errorText) {
-		return new ErrorMessage(errorText);
+	public static final MessageText of(String errorText) {
+		return new MessageText(errorText);
 	}
 
 }

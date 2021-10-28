@@ -12,53 +12,46 @@
  * You should have received a copy of the GNU General Public License along with this program; 
  * if not, see <http://www.gnu.org/licenses/>. 
  */
-package de.lexasoft.common.model;
+package de.lexasoft.common.swing;
+
+import de.lexasoft.common.model.Message;
+import de.lexasoft.common.model.MessageList;
 
 /**
- * Represents an error in any application.
+ * Controller for use with @MessagePanelImpl
  * 
  * @author nierax
  *
  */
-public class Error {
+public class MessageController {
 
-	private ErrorId errorId;
-	private ErrorMessage errorMessage;
+	private MessagePanel view;
+	private MessageList errors;
 
 	/**
-	 * Create an error message.
 	 * 
-	 * @param errorId
-	 * @param errorMessage
 	 */
-	private Error(ErrorId errorId, ErrorMessage errorMessage) {
-		super();
-		this.errorId = errorId;
-		this.errorMessage = errorMessage;
+	public MessageController(MessagePanel view) {
+		this.view = view;
+		this.errors = MessageList.of();
+	}
+
+	public void displayMessage(Message message) {
+		errors.addMessage(message);
+		outMessages();
+	}
+
+	public void unDisplayMessage(Message message) {
+		errors.removeMessage(message);
+		outMessages();
 	}
 
 	/**
-	 * @return the errorId
-	 */
-	public ErrorId getErrorId() {
-		return errorId;
-	}
-
-	/**
-	 * @return the errorMessage
-	 */
-	public ErrorMessage getErrorMessage() {
-		return errorMessage;
-	}
-
-	/**
-	 * Create an error message.
 	 * 
-	 * @param errorId
-	 * @param errorMessage
 	 */
-	public static final Error of(ErrorId errorId, ErrorMessage errorMessage) {
-		return new Error(errorId, errorMessage);
+	private void outMessages() {
+		view.removeAllMessagesFromTheGUI();
+		errors.stream().forEach(view::pushMessageToTheGUI);
 	}
 
 }

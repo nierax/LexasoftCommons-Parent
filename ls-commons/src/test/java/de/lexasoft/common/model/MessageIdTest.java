@@ -30,29 +30,29 @@ import org.junit.jupiter.params.provider.MethodSource;
  * @author nierax
  *
  */
-class ErrorIdTest {
+class MessageIdTest {
 
-	private ErrorId cut;
+	private MessageId cut;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		cut = ErrorId.of("0815");
+		cut = MessageId.of("0815");
 	}
 
 	private static final Stream<Arguments> equals_not_null() {
 		return Stream.of( //
-		    Arguments.of(ErrorId.of("0815"), true), //
-		    Arguments.of(ErrorId.of(), false), //
-		    Arguments.of(ErrorId.of("4711"), false), //
+		    Arguments.of(MessageId.of("0815"), true), //
+		    Arguments.of(MessageId.of(), false), //
+		    Arguments.of(MessageId.of("4711"), false), //
 		    Arguments.of("other type", false));
 	}
 
 	/**
 	 * Test method for
-	 * {@link de.lexasoft.common.model.ErrorId#equals(java.lang.Object)}. In case,
+	 * {@link de.lexasoft.common.model.MessageId#equals(java.lang.Object)}. In case,
 	 * equals should return true.
 	 */
 	@ParameterizedTest

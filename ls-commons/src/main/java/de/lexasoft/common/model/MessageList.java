@@ -20,27 +20,27 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * This list collects errors and offers methods to acces them.
+ * This list collects messages and offers methods to acces them.
  * 
  * @author nierax
  *
  */
-public class ErrorList {
+public class MessageList {
 
-	private List<Error> errors;
+	private List<Message> messages;
 
-	private ErrorList() {
-		errors = new ArrayList<>();
+	private MessageList() {
+		messages = new ArrayList<>();
 	}
 
 	/**
 	 * Add the given error to the list.
 	 * 
-	 * @param error The error to add
+	 * @param message The error to add
 	 * @return Reference to this list for fluent API writing
 	 */
-	public ErrorList addError(Error error) {
-		this.errors.add(error);
+	public MessageList addMessage(Message message) {
+		this.messages.add(message);
 		return this;
 	}
 
@@ -49,11 +49,11 @@ public class ErrorList {
 	 * <p>
 	 * The list remains unchanged, if there is not such error in the list.
 	 * 
-	 * @param error The error to remove.
+	 * @param message The error to remove.
 	 * @return
 	 */
-	public ErrorList removeError(Error error) {
-		errors.remove(error);
+	public MessageList removeMessage(Message message) {
+		messages.remove(message);
 		return this;
 	}
 
@@ -62,49 +62,49 @@ public class ErrorList {
 	 * <p>
 	 * Does nothing, if there is no error with the given id in the list.
 	 * 
-	 * @param errorId The error id to remove
+	 * @param messageId The error id to remove
 	 * @return The error list
 	 */
-	public ErrorList removeError(ErrorId errorId) {
-		findErrorById(errorId).ifPresent(errors::remove);
+	public MessageList removeError(MessageId messageId) {
+		findErrorById(messageId).ifPresent(messages::remove);
 		return this;
 	}
 
 	/**
 	 * Find the first error, connected to the given id.
 	 * 
-	 * @param errorId The error id to find
+	 * @param messageId The error id to find
 	 * @return An @Optional with the error, being empty, if there was no error with
 	 *         that error id.
 	 */
-	public Optional<Error> findErrorById(ErrorId errorId) {
-		return stream().filter(e -> e.getErrorId().equals(errorId)).findFirst();
+	public Optional<Message> findErrorById(MessageId messageId) {
+		return stream().filter(e -> e.getErrorId().equals(messageId)).findFirst();
 	}
 
 	/**
 	 * 
-	 * @return The number of errors in the list.
+	 * @return The number of messages in the list.
 	 */
 	public int nrOfErrors() {
-		return errors.size();
+		return messages.size();
 	}
 
 	/**
-	 * Removes all errors from the list.
+	 * Removes all messages from the list.
 	 * 
 	 * @return The list, now being empty.
 	 */
-	public ErrorList removeAllErrors() {
-		errors.clear();
+	public MessageList removeAllErrors() {
+		messages.clear();
 		return this;
 	}
 
 	/**
 	 * 
-	 * @return The stream of errors
+	 * @return The stream of messages
 	 */
-	public Stream<Error> stream() {
-		return errors.stream();
+	public Stream<Message> stream() {
+		return messages.stream();
 	}
 
 	/**
@@ -112,8 +112,8 @@ public class ErrorList {
 	 * 
 	 * @return Empty error list
 	 */
-	public final static ErrorList of() {
-		return new ErrorList();
+	public final static MessageList of() {
+		return new MessageList();
 	}
 
 }

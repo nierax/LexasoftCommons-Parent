@@ -27,65 +27,65 @@ import org.junit.jupiter.api.Test;
  * @author nierax
  *
  */
-class ErrorListTest {
+class MessageListTest {
 
-	private ErrorList cut;
+	private MessageList cut;
 
-	private Error error1;
-	private ErrorId errorId1;
-	private Error error2;
-	private ErrorId errorId2;
-	private Error error3;
-	private ErrorId errorId3;
+	private Message error1;
+	private MessageId errorId1;
+	private Message error2;
+	private MessageId errorId2;
+	private Message error3;
+	private MessageId errorId3;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		cut = ErrorList.of();
-		errorId1 = ErrorId.of("0815");
-		error1 = Error.of(errorId1, ErrorMessage.of("Error 1 occured"));
-		errorId2 = ErrorId.of();
-		error2 = Error.of(errorId2, ErrorMessage.of("Error 2 occured"));
-		errorId3 = ErrorId.of("4711");
-		error3 = Error.of(errorId3, ErrorMessage.of("Error 3 occured"));
+		cut = MessageList.of();
+		errorId1 = MessageId.of("0815");
+		error1 = Message.of(errorId1, MessageText.of("Message 1 occured"));
+		errorId2 = MessageId.of();
+		error2 = Message.of(errorId2, MessageText.of("Message 2 occured"));
+		errorId3 = MessageId.of("4711");
+		error3 = Message.of(errorId3, MessageText.of("Message 3 occured"));
 
-		cut.addError(error1);
-		cut.addError(error2);
-		cut.addError(error3);
+		cut.addMessage(error1);
+		cut.addMessage(error2);
+		cut.addMessage(error3);
 	}
 
 	@Test
 	final void find_Errors_By_Id_1() {
-		Optional<Error> error = cut.findErrorById(ErrorId.of("0815"));
-		assertTrue(error.isPresent());
-		assertEquals(error1, error.get());
+		Optional<Message> message = cut.findErrorById(MessageId.of("0815"));
+		assertTrue(message.isPresent());
+		assertEquals(error1, message.get());
 	}
 
 	@Test
 	final void find_Errors_By_Id_2() {
-		Optional<Error> error = cut.findErrorById(errorId2);
-		assertTrue(error.isPresent());
-		assertEquals(error2, error.get());
+		Optional<Message> message = cut.findErrorById(errorId2);
+		assertTrue(message.isPresent());
+		assertEquals(error2, message.get());
 	}
 
 	@Test
 	final void find_Errors_By_Id_3() {
-		Optional<Error> error = cut.findErrorById(errorId3);
-		assertTrue(error.isPresent());
-		assertEquals(error3, error.get());
+		Optional<Message> message = cut.findErrorById(errorId3);
+		assertTrue(message.isPresent());
+		assertEquals(error3, message.get());
 	}
 
 	@Test
 	final void find_Errors_By_Id_NotFound() {
-		Optional<Error> error = cut.findErrorById(ErrorId.of());
-		assertTrue(error.isEmpty());
+		Optional<Message> message = cut.findErrorById(MessageId.of());
+		assertTrue(message.isEmpty());
 	}
 
 	@Test
 	final void remove_error_() {
-		cut.removeError(error1);
+		cut.removeMessage(error1);
 		assertFalse(cut.findErrorById(error1.getErrorId()).isPresent());
 	}
 

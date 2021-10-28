@@ -20,20 +20,20 @@ package de.lexasoft.common.model;
  * @author nierax
  *
  */
-public class ErrorId {
+public class MessageId {
 
 	private String idString;
 
 	/**
-	 * The ErrorId needs a String Representation to be created.
+	 * The MessageId needs a String Representation to be created.
 	 * 
 	 * @param idString
 	 */
-	private ErrorId(String idString) {
+	private MessageId(String idString) {
 		this.idString = idString;
 	}
 
-	private ErrorId() {
+	private MessageId() {
 
 	}
 
@@ -43,39 +43,39 @@ public class ErrorId {
 	}
 
 	/**
-	 * The ErrorId will be created with a given Id String.
+	 * The MessageId will be created with a given Id String.
 	 * <p>
 	 * Can be used, if the value the error id is known.
 	 * <p>
 	 * The value can only be retrieved via the toString() method.
 	 * 
 	 * @param idString Value for the id.
-	 * @return ErrorId object with the given value as id.
+	 * @return MessageId object with the given value as id.
 	 */
-	public final static ErrorId of(String idString) {
-		return new ErrorId(idString);
+	public final static MessageId of(String idString) {
+		return new MessageId(idString);
 	}
 
 	/**
-	 * The ErrorId will be created with the hash code of the object as value.
+	 * The MessageId will be created with the hash code of the object as value.
 	 * <p>
 	 * This can be used, if there is no need for a special error id. In this case
-	 * the ErrorId object must be kept to retrieve the error from lists.
+	 * the MessageId object must be kept to retrieve the error from lists.
 	 * 
-	 * @return ErrorId
+	 * @return MessageId
 	 */
-	public final static ErrorId of() {
-		ErrorId errorId = new ErrorId();
-		errorId.idString = Integer.toString(errorId.hashCode());
-		return errorId;
+	public final static MessageId of() {
+		MessageId messageId = new MessageId();
+		messageId.idString = Integer.toString(messageId.hashCode());
+		return messageId;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if ((obj == null) || !(obj instanceof ErrorId)) {
+		if ((obj == null) || !(obj instanceof MessageId)) {
 			return false;
 		}
-		ErrorId other = (ErrorId) obj;
+		MessageId other = (MessageId) obj;
 		return idString.equals(other.idString);
 	}
 
