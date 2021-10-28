@@ -15,6 +15,8 @@
 package de.lexasoft.common.model;
 
 /**
+ * Represents an error in any application.
+ * 
  * @author nierax
  *
  */
@@ -49,6 +51,12 @@ public class Error {
 		return errorMessage;
 	}
 
+	/**
+	 * Create an error message.
+	 * 
+	 * @param errorId
+	 * @param errorMessage
+	 */
 	public static final Error of(ErrorId errorId, ErrorMessage errorMessage) {
 		return new Error(errorId, errorMessage);
 	}

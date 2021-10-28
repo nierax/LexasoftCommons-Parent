@@ -95,4 +95,15 @@ class ErrorListTest {
 		assertFalse(cut.findErrorById(errorId1).isPresent());
 	}
 
+	@Test
+	final void remove_all_errors() {
+		// Just make sure, there are some entries.
+		assertEquals(3, cut.nrOfErrors());
+		// Now remove all of them.
+		cut.removeAllErrors();
+		// Now there should be nor more errors
+		assertEquals(0, cut.nrOfErrors());
+		assertFalse(cut.findErrorById(errorId1).isPresent());
+	}
+
 }

@@ -83,6 +83,24 @@ public class ErrorList {
 
 	/**
 	 * 
+	 * @return The number of errors in the list.
+	 */
+	public int nrOfErrors() {
+		return errors.size();
+	}
+
+	/**
+	 * Removes all errors from the list.
+	 * 
+	 * @return The list, now being empty.
+	 */
+	public ErrorList removeAllErrors() {
+		errors.clear();
+		return this;
+	}
+
+	/**
+	 * 
 	 * @return The stream of errors
 	 */
 	public Stream<Error> stream() {
