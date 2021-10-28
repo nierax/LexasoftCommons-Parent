@@ -33,4 +33,11 @@ public interface MessagePanel {
 	 * Removes all errors from the gui.
 	 */
 	void removeAllMessagesFromTheGUI();
+
+	/**
+	 * Get the complete text about all messages.
+	 * 
+	 * @return
+	 */
+	String getCompleteText();
 }

@@ -15,6 +15,7 @@
 package de.lexasoft.common.swing;
 
 import de.lexasoft.common.model.Message;
+import de.lexasoft.common.model.MessageId;
 import de.lexasoft.common.model.MessageList;
 
 /**
@@ -43,6 +44,11 @@ public class MessageController {
 
 	public void unDisplayMessage(Message message) {
 		errors.removeMessage(message);
+		outMessages();
+	}
+
+	public void unDisplayMessage(MessageId messageId) {
+		errors.removeMessage(messageId);
 		outMessages();
 	}
 

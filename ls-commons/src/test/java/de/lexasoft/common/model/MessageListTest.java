@@ -91,7 +91,7 @@ class MessageListTest {
 
 	@Test
 	final void remove_error_from_id() {
-		cut.removeError(errorId1);
+		cut.removeMessage(errorId1);
 		assertFalse(cut.findErrorById(errorId1).isPresent());
 	}
 

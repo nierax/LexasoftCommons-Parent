@@ -14,6 +14,10 @@
  */
 package de.lexasoft.common.swing;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.util.Optional;
 
 import javax.swing.JPanel;
@@ -33,8 +37,13 @@ public class MessagePanelImpl extends JPanel implements MessagePanel {
 	 * 
 	 */
 	public MessagePanelImpl() {
-
+		setLayout(new BorderLayout(0, 0));
 		errorArea = new JTextArea();
+		errorArea.setWrapStyleWord(true);
+		errorArea.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		errorArea.setBackground(SystemColor.control);
+		errorArea.setEditable(false);
+		errorArea.setForeground(Color.RED);
 		add(errorArea);
 	}
 
@@ -49,10 +58,16 @@ public class MessagePanelImpl extends JPanel implements MessagePanel {
 		    .ifPresentOrElse(//
 		        e -> errorArea.append("\n" + text), //
 		        () -> errorArea.setText(text));
+		errorArea.setToolTipText(getCompleteText());
 	}
 
 	@Override
 	public void removeAllMessagesFromTheGUI() {
 		errorArea.setText("");
+	}
+
+	@Override
+	public String getCompleteText() {
+		return errorArea.getText();
 	}
 }

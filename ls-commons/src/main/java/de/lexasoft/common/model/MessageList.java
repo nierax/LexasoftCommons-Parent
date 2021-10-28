@@ -65,7 +65,7 @@ public class MessageList {
 	 * @param messageId The error id to remove
 	 * @return The error list
 	 */
-	public MessageList removeError(MessageId messageId) {
+	public MessageList removeMessage(MessageId messageId) {
 		findErrorById(messageId).ifPresent(messages::remove);
 		return this;
 	}
