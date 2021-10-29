@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -55,6 +56,7 @@ public class MessagePanelImpl extends JPanel implements MessagePanel {
 	public void pushMessageToTheGUI(Message message) {
 		String text = message.getErrorMessage().toString();
 		Optional.ofNullable(errorArea.getText()) //
+		    .filter(Predicate.not(String::isBlank)) //
 		    .ifPresentOrElse(//
 		        e -> errorArea.append("\n" + text), //
 		        () -> errorArea.setText(text));
