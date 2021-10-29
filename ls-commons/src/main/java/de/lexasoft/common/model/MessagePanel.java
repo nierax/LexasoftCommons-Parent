@@ -15,8 +15,10 @@
 package de.lexasoft.common.model;
 
 /**
+ * An abstract declaration for a gui element, displaying @Message with
+ * a @MessageController.
+ * 
  * @author nierax
- *
  */
 public interface MessagePanel {
 
