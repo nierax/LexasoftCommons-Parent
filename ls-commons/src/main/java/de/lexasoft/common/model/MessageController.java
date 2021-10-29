@@ -12,14 +12,10 @@
  * You should have received a copy of the GNU General Public License along with this program; 
  * if not, see <http://www.gnu.org/licenses/>. 
  */
-package de.lexasoft.common.swing;
-
-import de.lexasoft.common.model.Message;
-import de.lexasoft.common.model.MessageId;
-import de.lexasoft.common.model.MessageList;
+package de.lexasoft.common.model;
 
 /**
- * Controller for use with @MessagePanelImpl
+ * Controller for use with @MessagePanel
  * 
  * @author nierax
  *

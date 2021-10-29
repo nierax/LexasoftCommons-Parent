@@ -25,8 +25,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import de.lexasoft.common.model.Message;
+import de.lexasoft.common.model.MessageController;
 import de.lexasoft.common.model.MessageId;
 import de.lexasoft.common.model.MessageList;
+import de.lexasoft.common.model.MessagePanel;
 import de.lexasoft.common.model.MessageText;
 
 /**
@@ -62,7 +64,7 @@ class MessageControllerTest {
 
 	/**
 	 * Test method for
-	 * {@link de.lexasoft.common.swing.MessageController#displayMessage(java.lang.Error)}.
+	 * {@link de.lexasoft.common.model.MessageController#displayMessage(java.lang.Error)}.
 	 */
 	@Test
 	final void display_message_1_message() {
@@ -73,7 +75,7 @@ class MessageControllerTest {
 
 	/**
 	 * Test method for
-	 * {@link de.lexasoft.common.swing.MessageController#displayMessage(java.lang.Error)}.
+	 * {@link de.lexasoft.common.model.MessageController#displayMessage(java.lang.Error)}.
 	 */
 	@Test
 	final void display_message_3_messages() {
@@ -88,7 +90,7 @@ class MessageControllerTest {
 
 	/**
 	 * Test method for
-	 * {@link de.lexasoft.common.swing.MessageController#unDisplayMessage(java.lang.Error)}.
+	 * {@link de.lexasoft.common.model.MessageController#unDisplayMessage(java.lang.Error)}.
 	 */
 	@Test
 	final void testUnDisplayError() {

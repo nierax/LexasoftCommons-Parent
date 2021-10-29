@@ -25,51 +25,52 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import de.lexasoft.common.model.Message;
+import de.lexasoft.common.model.MessagePanel;
 
 /**
+ * This Panel is an implementation of @MessagePanel, based on a @JTextArea.
+ * <p>
+ * It consists of a @JPanel, holding a @JTextArea in Center (@BorderLayout).
+ * 
  * @author nierax
  *
  */
 @SuppressWarnings("serial")
-public class MessagePanelImpl extends JPanel implements MessagePanel {
-	private JTextArea errorArea;
+public class MessagePanelTextAreaImpl extends JPanel implements MessagePanel {
+	private JTextArea messageArea;
 
 	/**
-	 * 
+	 * Create an object of {@link MessagePanelTextAreaImpl}
 	 */
-	public MessagePanelImpl() {
+	public MessagePanelTextAreaImpl() {
 		setLayout(new BorderLayout(0, 0));
-		errorArea = new JTextArea();
-		errorArea.setWrapStyleWord(true);
-		errorArea.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		errorArea.setBackground(SystemColor.control);
-		errorArea.setEditable(false);
-		errorArea.setForeground(Color.RED);
-		add(errorArea);
-	}
-
-	JTextArea getErrorArea() {
-		return errorArea;
+		messageArea = new JTextArea();
+		messageArea.setWrapStyleWord(true);
+		messageArea.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		messageArea.setBackground(SystemColor.control);
+		messageArea.setEditable(false);
+		messageArea.setForeground(Color.RED);
+		add(messageArea);
 	}
 
 	@Override
 	public void pushMessageToTheGUI(Message message) {
 		String text = message.getErrorMessage().toString();
-		Optional.ofNullable(errorArea.getText()) //
+		Optional.ofNullable(messageArea.getText()) //
 		    .filter(Predicate.not(String::isBlank)) //
 		    .ifPresentOrElse(//
-		        e -> errorArea.append("\n" + text), //
-		        () -> errorArea.setText(text));
-		errorArea.setToolTipText(getCompleteText());
+		        e -> messageArea.append("\n" + text), //
+		        () -> messageArea.setText(text));
+		messageArea.setToolTipText(getCompleteText());
 	}
 
 	@Override
 	public void removeAllMessagesFromTheGUI() {
-		errorArea.setText("");
+		messageArea.setText("");
 	}
 
 	@Override
 	public String getCompleteText() {
-		return errorArea.getText();
+		return messageArea.getText();
 	}
 }
