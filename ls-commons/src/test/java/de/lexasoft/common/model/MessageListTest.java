@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -45,11 +46,11 @@ class MessageListTest {
 	void setUp() throws Exception {
 		cut = MessageList.of();
 		errorId1 = MessageId.of("0815");
-		error1 = Message.of(errorId1, MessageText.of("Message 1 occured"));
+		error1 = Message.of(errorId1, MessageText.of("Message 1 occured"), MessageSeverity.ERROR);
 		errorId2 = MessageId.of();
-		error2 = Message.of(errorId2, MessageText.of("Message 2 occured"));
+		error2 = Message.of(errorId2, MessageText.of("Message 2 occured"), MessageSeverity.ERROR);
 		errorId3 = MessageId.of("4711");
-		error3 = Message.of(errorId3, MessageText.of("Message 3 occured"));
+		error3 = Message.of(errorId3, MessageText.of("Message 3 occured"), MessageSeverity.ERROR);
 
 		cut.addMessage(error1);
 		cut.addMessage(error2);
@@ -57,53 +58,126 @@ class MessageListTest {
 	}
 
 	@Test
-	final void find_Errors_By_Id_1() {
-		Optional<Message> message = cut.findErrorById(MessageId.of("0815"));
+	final void find_message_By_Id_1() {
+		Optional<Message> message = cut.findMessageById(MessageId.of("0815"));
 		assertTrue(message.isPresent());
 		assertEquals(error1, message.get());
 	}
 
 	@Test
-	final void find_Errors_By_Id_2() {
-		Optional<Message> message = cut.findErrorById(errorId2);
+	final void find_message_By_Id_2() {
+		Optional<Message> message = cut.findMessageById(errorId2);
 		assertTrue(message.isPresent());
 		assertEquals(error2, message.get());
 	}
 
 	@Test
-	final void find_Errors_By_Id_3() {
-		Optional<Message> message = cut.findErrorById(errorId3);
+	final void find_message_By_Id_3() {
+		Optional<Message> message = cut.findMessageById(errorId3);
 		assertTrue(message.isPresent());
 		assertEquals(error3, message.get());
 	}
 
 	@Test
-	final void find_Errors_By_Id_NotFound() {
-		Optional<Message> message = cut.findErrorById(MessageId.of());
+	final void find_message_By_Id_NotFound() {
+		Optional<Message> message = cut.findMessageById(MessageId.of());
 		assertTrue(message.isEmpty());
 	}
 
 	@Test
 	final void remove_error_() {
 		cut.removeMessage(error1);
-		assertFalse(cut.findErrorById(error1.getErrorId()).isPresent());
+		assertFalse(cut.findMessageById(error1.getId()).isPresent());
 	}
 
 	@Test
 	final void remove_error_from_id() {
 		cut.removeMessage(errorId1);
-		assertFalse(cut.findErrorById(errorId1).isPresent());
+		assertFalse(cut.findMessageById(errorId1).isPresent());
 	}
 
 	@Test
 	final void remove_all_errors() {
 		// Just make sure, there are some entries.
-		assertEquals(3, cut.nrOfErrors());
+		assertEquals(3, cut.nrOfMessages());
 		// Now remove all of them.
-		cut.removeAllErrors();
+		cut.removeAllMessages();
 		// Now there should be nor more errors
-		assertEquals(0, cut.nrOfErrors());
-		assertFalse(cut.findErrorById(errorId1).isPresent());
+		assertEquals(0, cut.nrOfMessages());
+		assertFalse(cut.findMessageById(errorId1).isPresent());
+	}
+
+	@Test
+	final void find_all_messages_with_severity_error_3() {
+		// Run
+		List<Message> result = cut.findAllMessagesWithSeverity(MessageSeverity.ERROR);
+		// Check
+		assertEquals(3, result.size());
+		assertEquals(error1, result.get(0));
+		assertEquals(error2, result.get(1));
+		assertEquals(error3, result.get(2));
+	}
+
+	@Test
+	final void find_all_messages_with_severity_warning_none() {
+		// Run
+		List<Message> result = cut.findAllMessagesWithSeverity(MessageSeverity.WARNING);
+		// Check
+		assertEquals(0, result.size());
+	}
+
+	@Test
+	final void find_all_messages_with_severity_info_none() {
+		// Run
+		List<Message> result = cut.findAllMessagesWithSeverity(MessageSeverity.INFO);
+		// Check
+		assertEquals(0, result.size());
+	}
+
+	@Test
+	final void find_all_messages_with_severity_warning_1() {
+		// Prepare
+		Message warning = Message.of(MessageId.of(), MessageText.of("Message warning"), MessageSeverity.WARNING);
+		cut.addMessage(warning);
+		// Run
+		List<Message> result = cut.findAllMessagesWithSeverity(MessageSeverity.WARNING);
+		// Check
+		assertEquals(1, result.size());
+		assertEquals(warning, result.get(0));
+	}
+
+	@Test
+	final void count_messages_with_severity_error_3() {
+		// Run
+		long count = cut.countMessagesWithSeverity(MessageSeverity.ERROR);
+		// Check
+		assertEquals(3, count);
+	}
+
+	@Test
+	final void count_messages_with_severity_warning_0() {
+		// Run
+		long count = cut.countMessagesWithSeverity(MessageSeverity.WARNING);
+		// Check
+		assertEquals(0, count);
+	}
+
+	/**
+	 * Make sure, it is possible to run the method several times. Avoid side effects
+	 * from stream handling.
+	 */
+	@Test
+	final void count_messages_with_severity_info_1_warning_0_error_3() {
+		// Prepare
+		cut.addMessage(Message.of(MessageId.of(), MessageText.of("Info - 1  test"), MessageSeverity.INFO));
+		// Run
+		long countInfo = cut.countMessagesWithSeverity(MessageSeverity.INFO);
+		long countWarning = cut.countMessagesWithSeverity(MessageSeverity.WARNING);
+		long countError = cut.countMessagesWithSeverity(MessageSeverity.ERROR);
+		// Check
+		assertEquals(1, countInfo);
+		assertEquals(0, countWarning);
+		assertEquals(3, countError);
 	}
 
 }

@@ -29,6 +29,7 @@ import de.lexasoft.common.model.MessageController;
 import de.lexasoft.common.model.MessageId;
 import de.lexasoft.common.model.MessageList;
 import de.lexasoft.common.model.MessagePanel;
+import de.lexasoft.common.model.MessageSeverity;
 import de.lexasoft.common.model.MessageText;
 
 /**
@@ -54,9 +55,9 @@ class MessageControllerTest {
 		cut = new MessageController(view);
 		errors = MessageList.of();
 
-		error1 = Message.of(MessageId.of(), MessageText.of("Message 1 occured"));
-		error2 = Message.of(MessageId.of(), MessageText.of("Message 2 occured"));
-		error3 = Message.of(MessageId.of(), MessageText.of("Message 3 occured"));
+		error1 = Message.of(MessageId.of(), MessageText.of("Message 1 occured"), MessageSeverity.ERROR);
+		error2 = Message.of(MessageId.of(), MessageText.of("Message 2 occured"), MessageSeverity.ERROR);
+		error3 = Message.of(MessageId.of(), MessageText.of("Message 3 occured"), MessageSeverity.ERROR);
 		errors.addMessage(error1);
 		errors.addMessage(error2);
 		errors.addMessage(error3);
