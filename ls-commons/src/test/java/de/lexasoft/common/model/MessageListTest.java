@@ -16,6 +16,7 @@ package de.lexasoft.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -180,4 +181,20 @@ class MessageListTest {
 		assertEquals(3, countError);
 	}
 
+	@Test
+	final void add_messages_3_messages() {
+		// Prepare
+		MessageList other = MessageList.of() //
+		    .addMessage(Message.of(MessageId.of(), MessageText.of("Info - 2 - test"), MessageSeverity.INFO)) //
+		    .addMessage(Message.of(MessageId.of(), MessageText.of("Info - 3 - test"), MessageSeverity.INFO)) //
+		    .addMessage(Message.of(MessageId.of(), MessageText.of("Warning - 2 - test"), MessageSeverity.WARNING)); //
+
+		// Run
+		MessageList result = cut.addMessages(other);
+		// Check
+		assertSame(cut, result);
+		assertEquals(3, cut.countMessagesWithSeverity(MessageSeverity.ERROR));
+		assertEquals(2, cut.countMessagesWithSeverity(MessageSeverity.INFO));
+		assertEquals(1, cut.countMessagesWithSeverity(MessageSeverity.WARNING));
+	}
 }

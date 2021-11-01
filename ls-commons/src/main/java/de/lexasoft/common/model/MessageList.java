@@ -45,6 +45,13 @@ public class MessageList {
 		return this;
 	}
 
+	public MessageList addMessages(MessageList messages) {
+		Optional.ofNullable(messages)//
+		    .filter((ms) -> ms.messages.size() > 0)//
+		    .ifPresent((ms) -> ms.messages.forEach(this::addMessage));
+		return this;
+	}
+
 	/**
 	 * Remove the given error from the list.
 	 * <p>
