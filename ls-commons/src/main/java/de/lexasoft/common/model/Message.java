@@ -70,4 +70,9 @@ public class Message {
 		return severity;
 	}
 
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", text=" + text + ", severity=" + severity + "]";
+	}
+
 }

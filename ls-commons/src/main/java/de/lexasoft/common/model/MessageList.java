@@ -154,4 +154,9 @@ public class MessageList {
 		return new MessageList();
 	}
 
+	@Override
+	public String toString() {
+		return "MessageList [messages=" + messages + "]";
+	}
+
 }
