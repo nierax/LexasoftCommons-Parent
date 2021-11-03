@@ -6,7 +6,11 @@
     <booleanAttribute key="M2_OFFLINE" value="false"/>
     <stringAttribute key="M2_PROFILES" value=""/>
     <listAttribute key="M2_PROPERTIES">
+<<<<<<< Updated upstream
+        <listEntry value="newVersion=0.1.3"/>
+=======
         <listEntry value="newVersion=0.1.4"/>
+>>>>>>> Stashed changes
     </listAttribute>
     <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
     <booleanAttribute key="M2_SKIP_TESTS" value="false"/>
