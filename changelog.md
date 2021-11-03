@@ -1,8 +1,6 @@
 # Change log
 
 ## Unpublished
-**Enhancements**
-* Added message handling to package de.lexasoft.model
 
 ## Version 0.1.3
 Added de.lexasoft.common.cli.CompactFormatter with simple logging format (just the message).
