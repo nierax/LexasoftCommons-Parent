@@ -4,4 +4,5 @@ build*
 *.bak
 *.sik
 *.versionsBackup
+*.orig
 junit-tmp
