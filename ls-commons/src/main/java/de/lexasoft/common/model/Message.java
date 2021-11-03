@@ -22,43 +22,57 @@ package de.lexasoft.common.model;
  */
 public class Message {
 
-	private MessageId messageId;
-	private MessageText messageText;
+	private MessageId id;
+	private MessageText text;
+	private MessageSeverity severity;
 
 	/**
 	 * Create an error message.
 	 * 
-	 * @param messageId
-	 * @param messageText
+	 * @param id
+	 * @param text
 	 */
-	private Message(MessageId messageId, MessageText messageText) {
+	private Message(MessageId id, MessageText text, MessageSeverity severity) {
 		super();
-		this.messageId = messageId;
-		this.messageText = messageText;
+		this.id = id;
+		this.text = text;
+		this.severity = severity;
 	}
 
 	/**
-	 * @return the messageId
+	 * @return the id
 	 */
-	public MessageId getErrorId() {
-		return messageId;
+	public MessageId getId() {
+		return id;
 	}
 
 	/**
-	 * @return the messageText
+	 * @return the text
 	 */
-	public MessageText getErrorMessage() {
-		return messageText;
+	public MessageText getText() {
+		return text;
 	}
 
 	/**
 	 * Create an error message.
 	 * 
-	 * @param messageId
-	 * @param messageText
+	 * @param id
+	 * @param text
 	 */
-	public static final Message of(MessageId messageId, MessageText messageText) {
-		return new Message(messageId, messageText);
+	public static final Message of(MessageId id, MessageText text, MessageSeverity severity) {
+		return new Message(id, text, severity);
+	}
+
+	/**
+	 * @return the severity
+	 */
+	public MessageSeverity getSeverity() {
+		return severity;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", text=" + text + ", severity=" + severity + "]";
 	}
 
 }

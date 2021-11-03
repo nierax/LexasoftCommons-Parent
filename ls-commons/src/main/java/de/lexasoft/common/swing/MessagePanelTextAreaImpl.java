@@ -55,7 +55,7 @@ public class MessagePanelTextAreaImpl extends JPanel implements MessagePanel {
 
 	@Override
 	public void pushMessageToTheGUI(Message message) {
-		String text = message.getErrorMessage().toString();
+		String text = message.getText().toString();
 		Optional.ofNullable(messageArea.getText()) //
 		    .filter(Predicate.not(String::isBlank)) //
 		    .ifPresentOrElse(//

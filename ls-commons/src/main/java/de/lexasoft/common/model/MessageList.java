@@ -17,6 +17,7 @@ package de.lexasoft.common.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -44,6 +45,13 @@ public class MessageList {
 		return this;
 	}
 
+	public MessageList addMessages(MessageList messages) {
+		Optional.ofNullable(messages)//
+		    .filter((ms) -> ms.messages.size() > 0)//
+		    .ifPresent((ms) -> ms.messages.forEach(this::addMessage));
+		return this;
+	}
+
 	/**
 	 * Remove the given error from the list.
 	 * <p>
@@ -66,7 +74,8 @@ public class MessageList {
 	 * @return The error list
 	 */
 	public MessageList removeMessage(MessageId messageId) {
-		findErrorById(messageId).ifPresent(messages::remove);
+		findMessageById(messageId)//
+		    .ifPresent(messages::remove);
 		return this;
 	}
 
@@ -77,15 +86,44 @@ public class MessageList {
 	 * @return An @Optional with the error, being empty, if there was no error with
 	 *         that error id.
 	 */
-	public Optional<Message> findErrorById(MessageId messageId) {
-		return stream().filter(e -> e.getErrorId().equals(messageId)).findFirst();
+	public Optional<Message> findMessageById(MessageId messageId) {
+		return stream()//
+		    .filter(e -> e.getId().equals(messageId))//
+		    .findFirst();
+	}
+
+	private Stream<Message> filterMessagesWithSeverity(MessageSeverity severity) {
+		return stream() //
+		    .filter((m) -> m.getSeverity() == severity);
+	}
+
+	/**
+	 * Get all messages with the given severity.
+	 * 
+	 * @param severity The severity asked for.
+	 * @return A new list, only containing the messages with the severity given.
+	 */
+	public List<Message> findAllMessagesWithSeverity(MessageSeverity severity) {
+		return filterMessagesWithSeverity(severity)//
+		    .collect(Collectors.toList());
+	}
+
+	/**
+	 * Counts the number of messages with the given severity.
+	 * 
+	 * @param severity The severity to do count.
+	 * @return The number of messages with the given severity.
+	 */
+	public long countMessagesWithSeverity(MessageSeverity severity) {
+		return filterMessagesWithSeverity(severity)//
+		    .count();
 	}
 
 	/**
 	 * 
 	 * @return The number of messages in the list.
 	 */
-	public int nrOfErrors() {
+	public int nrOfMessages() {
 		return messages.size();
 	}
 
@@ -94,7 +132,7 @@ public class MessageList {
 	 * 
 	 * @return The list, now being empty.
 	 */
-	public MessageList removeAllErrors() {
+	public MessageList removeAllMessages() {
 		messages.clear();
 		return this;
 	}
@@ -114,6 +152,11 @@ public class MessageList {
 	 */
 	public final static MessageList of() {
 		return new MessageList();
+	}
+
+	@Override
+	public String toString() {
+		return "MessageList [messages=" + messages + "]";
 	}
 
 }
