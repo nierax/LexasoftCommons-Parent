@@ -1,6 +1,11 @@
 # Change log
 
 ## Unpublished
+**Enhancements**
+
+## Version 0.1.4
+* Added a common result type (de.lexasoft.common.model.Result<T>) 
+* Added message handling to package de.lexasoft.model
 
 ## Version 0.1.3
 Added de.lexasoft.common.cli.CompactFormatter with simple logging format (just the message).
